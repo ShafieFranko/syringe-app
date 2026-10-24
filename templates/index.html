@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منصة سرنجة - للخدمات التمريضية</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; direction: rtl; text-align: right; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #007bff; text-align: center; }
+        .form-section { background: #eef2f7; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background-color: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>منصة سرنجة 🩺 (خدمات التمريض المنزلي)</h1>
+        
+        <div class="form-section">
+            <h3>تسجيل ممرض جديد</h3>
+            <form action="/register_nurse" method="post">
+                <input type="text" name="name" placeholder="اسم الممرض" required>
+                <input type="text" name="syndicate_id" placeholder="رقم كارنيه النقابة" required>
+                <input type="text" name="phone" placeholder="رقم الهاتف" required>
+                <input type="text" name="area" placeholder="المنطقة / الإدارة التابع لها" required>
+                <button type="submit">تسجيل الممرض</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h3>طلب خدمة تمريضية</h3>
+            <form action="/create_request" method="post">
+                <input type="text" name="patient_name" placeholder="اسم المريض" required>
+                <input type="text" name="service_type" placeholder="نوع الخدمة (حقنة، تركيب كانيوة...)" required>
+                <input type="text" name="address" placeholder="العنوان بالتفصيل" required>
+                <input type="text" name="phone" placeholder="رقم التواصل" required>
+                <button type="submit">إرسال الطلب</button>
+            </form>
+        </div>
+
+        <h3>الممرضون المسجلون</h3>
+        <table>
+            <tr>
+                <th>الاسم</th>
+                <th>رقم النقابة</th>
+                <th>الهاتف</th>
+                <th>المنطقة</th>
+            </tr>
+            {% for nurse in nurses %}
+            <tr>
+                <td>{{ nurse.name }}</td>
+                <td>{{ nurse.syndicate_id }}</td>
+                <td>{{ nurse.phone }}</td>
+                <td>{{ nurse.area }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
